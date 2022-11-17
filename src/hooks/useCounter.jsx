@@ -1,28 +1,35 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 
-function useCounter(initialState = 0, prev, max, min) {
-const [count, setCount] = useState(initialState,)
+function useCounter(initialState, prev, max, min) {
+  const [count, setCount] = useState(initialState);
 
-const changeNumberInc = () => {
-    if (count >= max) {
-     return   alert("Sorry, reached the maximum number")
+  const changeNumberInc = () => {
+    if (count + prev <= max) {
+      setCount(count + prev);
+      
+      return
     }
-    setCount(count + prev)
-}
-const changeNumberDec = () => {
-    if (count > 0) {
-        setCount(count - prev)
-     }else if (count === min) {
-        alert("Sorry, reached the minimum number")
-     }
+    return alert("Sorry, reached the maximum number");
+  };
+  const changeNumberDec = () => {
+    // if (count > 0) {
+    //   setCount(count - prev);
+    // } else if (count === min) {
+    //   alert("Sorry, reached the minimum number");
+    // }
+    if (count - prev >= min) {
+        setCount(count - prev);
+    return
+    }
+   return alert("Sorry, reached the minimum number");
+  };
+
+  const resetNumber = () => {
+    setCount(initialState);
+  };
+
+  return { changeNumberInc, changeNumberDec, count, resetNumber };
 }
 
-const resetNumber = () => {
-    setCount(initialState)
-}
-
-  return {changeNumberInc, changeNumberDec, count, resetNumber}
-}
-
-export default useCounter
+export default useCounter;

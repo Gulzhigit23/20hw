@@ -1,8 +1,8 @@
 import React from 'react'
 import useCounter from './hooks/useCounter'
-
+let number = 9
 function App() {
-  const {changeNumberInc, changeNumberDec,count,resetNumber } = useCounter(0,5,50,0)
+  const {changeNumberInc, changeNumberDec,count,resetNumber } = useCounter(number,5,50,0)
   
   return (
     <div>
