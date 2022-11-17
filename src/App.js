@@ -1,29 +1,18 @@
-import "./App.css";
-import styled from "styled-components";
-import { useRef } from "react";
-import { useEffect } from "react";
+import React from 'react'
+import useCounter from './hooks/useCounter'
 
 function App() {
-  const refColor = useRef();
-  useEffect(() => {
-    const timeout = setInterval(() => {
-      if (refColor.current.style.background === "blue") {
-        return (refColor.current.style.background = "red");
-      } 
-        return refColor.current.style.background ="blue"
-      
-    },1000)
-    return () => clearInterval(timeout)
-  }, []);
-
-  return <Div ref={refColor}></Div>;
+  const {changeNumberInc, changeNumberDec,count,resetNumber } = useCounter(0,5,50,0)
+  
+  return (
+    <div>
+      {/* <input value={count} type="text" /> */}
+      <h1>{count}</h1>
+      <button onClick={changeNumberInc}>+</button>
+      <button onClick={changeNumberDec}>-</button>
+      <button onClick={resetNumber}>reset</button>
+    </div>
+  )
 }
 
-export default App;
-
-const Div = styled.div`
-  width: 400px;
-  height: 400px;
-  margin: auto;
-  border-radius: 50%;
-`;
+export default App
